@@ -1,9 +1,10 @@
 import requests
-from youtube_transcript_api import YouTubeTranscriptApi
 import re
-video_id = 'rv1MzhOMrb8'
-# print(YouTubeTranscriptApi.get_transcript(video_id))
+import json
 
+def save_file(arr):
+    with open('events_data.json', 'w') as file:
+        json.dump(arr, file)
 
 def process_text(text):
     text = re.sub(r'<a.*?>.*?</a>', '', text)
@@ -74,6 +75,7 @@ for i in teams_dict.values():
         events_array.append(event_dict)
 
 print(len(events_array))
+save_file(events_array)
 
 # data = api_call('https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401326638')
 # print(data['article']['story'])
