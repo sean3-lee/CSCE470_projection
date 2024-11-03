@@ -3,7 +3,7 @@ import re
 import json
 
 def save_file(arr):
-    with open('events_data.json', 'w') as file:
+    with open('events_data_dict.json', 'w') as file:
         json.dump(arr, file)
 
 def process_text(text):
@@ -50,6 +50,7 @@ for i in data['items']:
     Get all events from each team - put in once large array
 '''
 events_array = []
+all_events = {}
 stats_url = 'https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event='
 
 def get_boxscore_stats(event_id):
@@ -73,9 +74,11 @@ for i in teams_dict.values():
         event_dict['boxscore'] = get_boxscore_stats(d['id'])
         event_dict['story'] = get_story(d['id'])
         events_array.append(event_dict)
+        all_events[d['id']] = event_dict
 
-print(len(events_array))
+print(len(all_events))
 save_file(events_array)
+save_file(all_events)
 
 # data = api_call('https://site.api.espn.com/apis/site/v2/sports/football/nfl/summary?event=401326638')
 # print(data['article']['story'])
