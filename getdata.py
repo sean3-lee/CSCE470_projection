@@ -72,7 +72,7 @@ for i in teams_dict.values():
         event_dict['id'] = d['id']
         event_dict['name'] = d['name']
         event_dict['boxscore'] = get_boxscore_stats(d['id'])
-        event_dict['story'] = get_story(d['id'])
+        event_dict['text'] = get_story(d['id'])
         events_array.append(event_dict)
         all_events[d['id']] = event_dict
 
